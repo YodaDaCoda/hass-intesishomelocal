@@ -18,8 +18,8 @@ _LOGGER = logging.getLogger(__name__)
 LOCAL_AUTH_SCHEMA = vol.Schema(
     {
         vol.Required(CONF_HOST): str,
-        vol.Required(CONF_USERNAME): str,
-        vol.Required(CONF_PASSWORD): str,
+        vol.Required(CONF_USERNAME, description={"suggested_value": "Admin"}): str,
+        vol.Required(CONF_PASSWORD, description={"suggested_value": "admin"}): str,
     }
 )
 
