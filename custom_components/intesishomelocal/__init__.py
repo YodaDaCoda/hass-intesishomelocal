@@ -14,7 +14,7 @@ _LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up IntesisHome from a config entry."""
-    _LOGGER.info("Setting up IntesisHome integration for entry: %s", entry.entry_id)
+    _LOGGER.info(f"Setting up {DOMAIN} integration for entry: %s", entry.entry_id)
     hass.data.setdefault(DOMAIN, {})
     hass.data[DOMAIN][entry.entry_id] = entry.data
 
@@ -29,7 +29,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload a config entry."""
-    _LOGGER.info("Unloading IntesisHome integration for entry: %s", entry.entry_id)
+    _LOGGER.info(f"Unloading {DOMAIN} integration for entry: %s", entry.entry_id)
     try:
         unload_ok = all(
             await asyncio.gather(

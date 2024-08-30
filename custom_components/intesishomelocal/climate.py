@@ -122,7 +122,7 @@ async def async_setup_entry(
         await controller.stop()
         return False
     except IHConnectionError as ex:
-        _LOGGER.error("Error connecting to the IntesisHome Local API")
+        _LOGGER.error(f"Error connecting to the {DOMAIN} API")
         raise PlatformNotReady from ex
 
     if ih_devices := controller.get_devices():
@@ -136,7 +136,7 @@ async def async_setup_entry(
         return True
 
     _LOGGER.error(
-        "Error getting device list from IntesisHome Local API: %s",
+        f"Error getting device list from {DOMAIN} API: %s",
         controller.error_message,
     )
     await controller.stop()
