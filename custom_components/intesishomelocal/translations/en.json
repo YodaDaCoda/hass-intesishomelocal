@@ -1,0 +1,22 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "This device has already been configured."
+    },
+    "step": {
+      "user": {
+        "data": {
+          "host": "Device IP address",
+          "username": "Username",
+          "password": "Password"
+        },
+        "title": "Connect to your Intesis device"
+      }
+    },
+    "error": {
+      "unknown": "An unknown error occurred.",
+      "invalid_auth": "Invalid username or password.",
+      "cannot_connect": "An error occurred connecting to the remote device."
+    }
+  }
+}

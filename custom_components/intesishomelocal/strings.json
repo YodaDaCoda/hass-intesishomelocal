@@ -6,23 +6,15 @@
     "step": {
       "user": {
         "data": {
-          "device": "Device type"
-        },
-        "title": "Select the type of Intesis device to add"
-      },
-      "details": {
-        "data": {
-          "device": "Device type",
           "host": "Hostname/IP address of the device",
-          "password": "[%key:common::config_flow::data::password%]",
-          "username": "[%key:common::config_flow::data::username%]"
+          "username": "[%key:common::config_flow::data::username%]",
+          "password": "[%key:common::config_flow::data::password%]"
         },
-        "title": "Connect to your IntesisHome account"
+        "title": "Connect to your IntesisHome device"
       }
     },
     "error": {
       "unknown": "[%key:common::config_flow::error::unknown%]",
-      "no_devices": "There are no devices linked to this account.",
       "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
       "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]"
     }
