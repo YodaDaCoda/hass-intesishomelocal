@@ -1,4 +1,3 @@
-# pylint: disable=duplicate-code
 """Support for IntesisHome and airconwithme Smart AC Controllers."""
 from __future__ import annotations
 
@@ -171,7 +170,6 @@ async def async_setup_platform(
         await controller.stop()
 
 
-# pylint: disable=too-many-instance-attributes, too-many-arguments, too-many-public-methods
 class IntesisAC(ClimateEntity):
     """Represents an Intesishome air conditioning device."""
 

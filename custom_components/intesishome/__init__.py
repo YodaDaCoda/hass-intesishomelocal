@@ -1,4 +1,3 @@
-# pylint: disable=duplicate-code
 """The IntesisHome integration."""
 from __future__ import annotations
 

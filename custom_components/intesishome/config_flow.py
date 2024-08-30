@@ -1,4 +1,3 @@
-# pylint: disable=duplicate-code
 """Config flow for IntesisHome."""
 import logging
 
@@ -132,7 +131,7 @@ class IntesisConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         except IHConnectionError:
             errors["base"] = "cannot_connect"
             controller = None
-        except Exception:  # pylint: disable=broad-except
+        except Exception:
             _LOGGER.exception("Unexpected exception")
             errors["base"] = "unknown"
             controller = None
