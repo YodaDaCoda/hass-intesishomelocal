@@ -3,9 +3,9 @@
   "name": "IntesisHome Local",
   "codeowners": ["@YodaDaCoda"],
   "config_flow": true,
-  "documentation": "https://www.home-assistant.io/integrations/intesishome",
+  "documentation": "https://www.home-assistant.io/integrations/intesishomelocal",
   "iot_class": "local_polling",
   "loggers": ["pyintesishome"],
-  "requirements": ["pyintesishome==1.8.5"],
+  "requirements": ["pyIntesisHome@git+https://github.com/YodaDaCoda/pyIntesisHome.git@419b904"],
   "version": "0.0.1"
 }
