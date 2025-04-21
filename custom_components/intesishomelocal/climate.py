@@ -318,7 +318,7 @@ class IntesisAC(ClimateEntity):
     def preset_mode(self):
         """Return the current preset mode."""
         return self._preset
-    
+
     async def async_turn_on(self) -> None:
         """Turn device on."""
         self._power = True
@@ -391,16 +391,12 @@ class IntesisAC(ClimateEntity):
     async def async_set_swing_mode(self, swing_mode):
         """Set the vertical vane."""
         if swingmode := MAP_SWING_TO_IH.get(swing_mode):
-            await self._controller.set_vertical_vane(
-                self._device_id, swingmode
-            )
+            await self._controller.set_vertical_vane(self._device_id, swingmode)
 
     async def async_set_swing_horizontal_mode(self, swing_mode):
         """Set the horizontal vane."""
         if swingmode := MAP_HORIZONTAL_SWING_TO_IH.get(swing_mode):
-            await self._controller.set_horizontal_vane(
-                self._device_id, swingmode
-            )
+            await self._controller.set_horizontal_vane(self._device_id, swingmode)
 
     async def async_update(self):
         """Copy values from controller dictionary to climate device."""
@@ -444,7 +440,9 @@ class IntesisAC(ClimateEntity):
             if len(self._swing_list) > 0:
                 self._attr_supported_features |= ClimateEntityFeature.SWING_MODE
             if len(self._swing_horizontal_list) > 0:
-                self._attr_supported_features |= ClimateEntityFeature.SWING_HORIZONTAL_MODE
+                self._attr_supported_features |= (
+                    ClimateEntityFeature.SWING_HORIZONTAL_MODE
+                )
             if self._ih_device.get("climate_working_mode"):
                 self._attr_supported_features |= ClimateEntityFeature.PRESET_MODE
 
@@ -538,7 +536,7 @@ class IntesisAC(ClimateEntity):
             return swing
         except ValueError:
             return None
-    
+
     @property
     def swing_horizontal_mode(self):
         if self._vvane is None:
@@ -560,7 +558,7 @@ class IntesisAC(ClimateEntity):
     def swing_modes(self):
         """List of available vertical swing positions."""
         return self._swing_list
-    
+
     @property
     def swing_horizontal_modes(self):
         """List of available horizontal swing positions."""
@@ -602,10 +600,10 @@ class IntesisAC(ClimateEntity):
         return DeviceInfo(
             identifiers={
                 # Serial numbers are unique identifiers within a specific domain
-                (DOMAIN, self._controller.controller_id, self._device_id) 
+                (DOMAIN, self._controller.controller_id, self._device_id)
             },
             name=self._device_name,
             manufacturer=self._device_type.capitalize(),
             model=controller_model,
-            sw_version=controller_fw_version
+            sw_version=controller_fw_version,
         )
