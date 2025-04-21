@@ -61,27 +61,35 @@ MAP_PRESET_MODE_TO_IH = {v: k for k, v in MAP_IH_TO_PRESET_MODE.items()}
 
 MAP_SWING_TO_IH = {
     SWING_OFF: "auto/stop",
+    "Position 1": "manual1",
+    "Position 2": "manual2",
+    "Position 3": "manual3",
+    "Position 4": "manual4",
+    "Position 5": "manual5",
+    "Position 6": "manual6",
+    "Position 7": "manual7",
+    "Position 8": "manual8",
+    "Position 9": "manual9",
     "Swing": "swing",
-    "Position1": "manual1",
-    "Position2": "manual2", 
-    "Position3": "manual3",
-    "Position4": "manual4",
-    "Position5": "manual5",
-    "Position6": "manual6",
-    "Position7": "manual7",
-    "Position8": "manual8",
-    "Position9": "manual9",
+    "Swirl": "swirl",
+    "wide": "wide",
 }
 MAP_IH_TO_SWING = {v: k for k, v in MAP_SWING_TO_IH.items()}
 
 MAP_HORIZONTAL_SWING_TO_IH = {
     SWING_OFF: "auto/stop",
+    "Position 1": "manual1",
+    "Position 2": "manual2",
+    "Position 3": "manual3",
+    "Position 4": "manual4",
+    "Position 5": "manual5",
+    "Position 6": "manual6",
+    "Position 7": "manual7",
+    "Position 8": "manual8",
+    "Position 9": "manual9",
     "Swing": "swing",
-    "Position1": "manual1",
-    "Position2": "manual2", 
-    "Position3": "manual3",
-    "Position4": "manual4",
-    "Position5": "manual5"
+    "Swirl": "swirl",
+    "Wide": "wide",
 }
 MAP_IH_TO_HORIZONTAL_SWING = {v: k for k, v in MAP_HORIZONTAL_SWING_TO_IH.items()}
 
@@ -211,13 +219,9 @@ class IntesisAC(ClimateEntity):
                             _LOGGER.warning("Unexpected swingmode: %s", swingmode)
                     self._swing_list.extend(swingmode_list)
             else:
-                self._swing_list.extend([
-                    "Swing",
-                    "Position1",
-                    "Position2",
-                    "Position3", 
-                    "Position4"
-                ])
+                self._swing_list.extend(
+                    ["Swing", "Position 1", "Position 2", "Position 3", "Position 4"]
+                )
         if controller.has_horizontal_swing(ih_device_id):
             if hasattr(controller, "get_horizontal_swing_list"):
                 if swingmodes := controller.get_horizontal_swing_list(ih_device_id):
@@ -229,13 +233,9 @@ class IntesisAC(ClimateEntity):
                             _LOGGER.warning("Unexpected swingmode: %s", swingmode)
                     self._swing_horizontal_list.extend(swingmode_list)
             else:
-                self._swing_list.extend([
-                    "Swing",
-                    "Position1",
-                    "Position2",
-                    "Position3", 
-                    "Position4"
-                ])
+                self._swing_list.extend(
+                    ["Swing", "Position 1", "Position 2", "Position 3", "Position 4"]
+                )
         if len(self._swing_list) > 0:
             self._attr_supported_features |= ClimateEntityFeature.SWING_MODE
         if len(self._swing_horizontal_list) > 0:
