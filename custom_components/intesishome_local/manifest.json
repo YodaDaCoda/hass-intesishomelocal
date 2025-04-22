@@ -1,5 +1,5 @@
 {
-  "domain": "intesishomelocal",
+  "domain": "intesishome_local",
   "name": "IntesisHome Local",
   "codeowners": ["@YodaDaCoda"],
   "config_flow": true,

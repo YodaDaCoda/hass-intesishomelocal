@@ -7,7 +7,7 @@ import logging
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
-DOMAIN = "intesishomelocal"
+DOMAIN = "intesishome_local"
 PLATFORMS = ["climate"]
 
 _LOGGER = logging.getLogger(__name__)

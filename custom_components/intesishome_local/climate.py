@@ -326,16 +326,16 @@ class IntesisAC(ClimateEntity):
     async def async_turn_on(self) -> None:
         """Turn device on."""
         self._power = True
-        await self._controller.set_power_on(self._device_id)
+        await self._controller.set_power_on()
 
     async def async_turn_off(self) -> None:
         """Turn device off."""
         self._power = False
-        await self._controller.set_power_off(self._device_id)
+        await self._controller.set_power_off()
 
     async def async_toggle(self) -> None:
         """Toggle device status."""
-        if not self._controller.is_on(self._device_id):
+        if not self._controller.is_on():
             await self.async_turn_on()
         else:
             await self.async_turn_off()
