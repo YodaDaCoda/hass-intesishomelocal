@@ -208,29 +208,33 @@ class IntesisAC(ClimateEntity):
             self._attr_supported_features |= ClimateEntityFeature.TARGET_TEMPERATURE
 
         # Setup swing lists
-        if controller.has_vertical_swing(ih_device_id):
+        if controller.has_vertical_swing():
             if hasattr(controller, "get_vertical_swing_list"):
-                if swingmodes := controller.get_vertical_swing_list(ih_device_id):
+                if swingmodes := controller.get_vertical_swing_list():
                     swingmode_list = []
                     for swingmode in swingmodes:
                         if swingmode in MAP_IH_TO_SWING:
                             swingmode_list.append(MAP_IH_TO_SWING[swingmode])
                         else:
-                            _LOGGER.warning("Unexpected swingmode: %s", swingmode)
+                            _LOGGER.warning(
+                                f"Unexpected vvane swingmode: {swingmode}, expected one of {MAP_IH_TO_SWING.keys()}"
+                            )
                     self._swing_list.extend(swingmode_list)
             else:
                 self._swing_list.extend(
                     ["Swing", "Position 1", "Position 2", "Position 3", "Position 4"]
                 )
-        if controller.has_horizontal_swing(ih_device_id):
+        if controller.has_horizontal_swing():
             if hasattr(controller, "get_horizontal_swing_list"):
-                if swingmodes := controller.get_horizontal_swing_list(ih_device_id):
+                if swingmodes := controller.get_horizontal_swing_list():
                     swingmode_list = []
                     for swingmode in swingmodes:
                         if swingmode in MAP_IH_TO_SWING:
                             swingmode_list.append(MAP_IH_TO_HORIZONTAL_SWING[swingmode])
                         else:
-                            _LOGGER.warning("Unexpected swingmode: %s", swingmode)
+                            _LOGGER.warning(
+                                f"Unexpected hvane swingmode: {swingmode}, expected one of {MAP_IH_TO_SWING.keys()}"
+                            )
                     self._swing_horizontal_list.extend(swingmode_list)
             else:
                 self._swing_list.extend(
@@ -354,7 +358,7 @@ class IntesisAC(ClimateEntity):
         _LOGGER.debug("Setting %s to %s mode", self._device_type, hvac_mode)
         if hvac_mode == HVACMode.OFF:
             self._power = False
-            await self._controller.set_power_off(self._device_id)
+            await self._controller.set_power_off()
             # Write changes to HA, API can be slow to push changes
             self.async_write_ha_state()
             return
@@ -362,7 +366,7 @@ class IntesisAC(ClimateEntity):
         # First check device is turned on
         if not self._controller.is_on(self._device_id):
             self._power = True
-            await self._controller.set_power_on(self._device_id)
+            await self._controller.set_power_on()
 
         # Set the mode
         await self._controller.set_mode(self._device_id, MAP_HVAC_MODE_TO_IH[hvac_mode])
@@ -386,7 +390,7 @@ class IntesisAC(ClimateEntity):
     async def async_set_preset_mode(self, preset_mode):
         """Set preset mode."""
         ih_preset_mode = MAP_PRESET_MODE_TO_IH.get(preset_mode)
-        await self._controller.set_preset_mode(self._device_id, ih_preset_mode)
+        await self._controller.set_preset_mode(ih_preset_mode)
 
     async def async_set_swing_mode(self, swing_mode):
         """Set the vertical vane."""
@@ -594,9 +598,9 @@ class IntesisAC(ClimateEntity):
         controller_model = None
         controller_fw_version = None
         if hasattr(self._controller, "get_model"):
-            controller_model = self._controller.get_model(self._device_id)
+            controller_model = self._controller.get_model()
         if hasattr(self._controller, "get_fw_version"):
-            controller_fw_version = self._controller.get_fw_version(self._device_id)
+            controller_fw_version = self._controller.get_fw_version()
         return DeviceInfo(
             identifiers={
                 # Serial numbers are unique identifiers within a specific domain
