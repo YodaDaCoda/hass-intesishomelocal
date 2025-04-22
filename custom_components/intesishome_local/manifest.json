@@ -5,6 +5,7 @@
   "config_flow": true,
   "documentation": "https://github.com/YodaDaCoda/hass-intesishomelocal/blob/master/README.md",
   "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/YodaDaCoda/hass-intesishomelocal/issues",
   "loggers": ["pyintesishome"],
   "requirements": ["pyIntesisHome@git+https://github.com/YodaDaCoda/pyIntesisHome.git@419b904"],
   "version": "0.0.1"
